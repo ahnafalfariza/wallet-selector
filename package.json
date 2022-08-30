@@ -79,7 +79,7 @@
     "core-js": "^3.6.5",
     "is-mobile": "^3.1.1",
     "near-api-js": "^0.44.2",
-    "next": "12.2.3",
+    "next": "12.2.4",
     "ngx-deploy-npm": "^4.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
