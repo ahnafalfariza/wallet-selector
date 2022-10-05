@@ -13,6 +13,7 @@ import { setupLedger } from "@paras-wallet-selector/ledger";
 import { setupWalletConnect } from "@paras-wallet-selector/wallet-connect";
 import { setupNightlyConnect } from "@paras-wallet-selector/nightly-connect";
 import { CONTRACT_ID } from "../constants";
+import { setupMeteorWallet } from "@paras-wallet-selector/meteor-wallet";
 
 declare global {
   interface Window {
@@ -47,6 +48,7 @@ export const WalletSelectorContextProvider: React.FC = ({ children }) => {
         setupMathWallet(),
         setupNightly(),
         setupLedger(),
+        setupMeteorWallet(),
         setupWalletConnect({
           projectId: "c4f79cc...",
           metadata: {
