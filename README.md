@@ -4,6 +4,7 @@ NEAR Wallet Selector makes it easy for users to interact with your dApp by provi
 
 - [NEAR Wallet](https://www.npmjs.com/package/@paras-wallet-selector/near-wallet) - Browser wallet.
 - [My NEAR Wallet](https://www.npmjs.com/package/@paras-wallet-selector/my-near-wallet) - Browser wallet.
+- [HERE Wallet](https://www.npmjs.com/package/@paras-wallet-selector/my-near-wallet) - Mobile wallet.
 - [Sender](https://www.npmjs.com/package/@paras-wallet-selector/sender) - Injected wallet.
 - [Math Wallet](https://www.npmjs.com/package/@paras-wallet-selector/math-wallet) - Injected wallet.
 - [Nightly](https://www.npmjs.com/package/@paras-wallet-selector/nightly) - Injected wallet.
@@ -36,17 +37,19 @@ Next, you'll need to install the wallets you want to support:
 yarn add \
   @paras-wallet-selector/near-wallet \
   @paras-wallet-selector/my-near-wallet \
+  @paras-wallet-selector/here-wallet \
   @paras-wallet-selector/sender \
   @paras-wallet-selector/math-wallet \
   @paras-wallet-selector/nightly \
   @paras-wallet-selector/ledger \
   @paras-wallet-selector/wallet-connect \
-  @paras-wallet-selector/nightly-connect 
+  @paras-wallet-selector/nightly-connect
 
 # Using NPM.
 npm install \
   @paras-wallet-selector/near-wallet \
   @paras-wallet-selector/my-near-wallet \
+  @paras-wallet-selector/here-wallet \
   @paras-wallet-selector/sender \
   @paras-wallet-selector/math-wallet \
   @paras-wallet-selector/nightly \
@@ -72,6 +75,7 @@ import { setupWalletSelector } from "@paras-wallet-selector/core";
 import { setupModal } from "@paras-wallet-selector/modal-ui";
 import { setupNearWallet } from "@paras-wallet-selector/near-wallet";
 import { setupMyNearWallet } from "@paras-wallet-selector/my-near-wallet";
+import { setupHereWallet } from "@paras-wallet-selector/here-wallet";
 import { setupSender } from "@paras-wallet-selector/sender";
 import { setupMathWallet } from "@paras-wallet-selector/math-wallet";
 import { setupNightly } from "@paras-wallet-selector/nightly";
@@ -84,6 +88,7 @@ const selector = await setupWalletSelector({
   modules: [
     setupNearWallet(),
     setupMyNearWallet(),
+    setupHereWallet(),
     setupSender(),
     setupMathWallet(),
     setupNightly(),
@@ -110,7 +115,7 @@ const selector = await setupWalletSelector({
 });
 
 const modal = setupModal(selector, {
-  contractId: "guest-book.testnet"
+  contractId: "guest-book.testnet",
 });
 ```
 

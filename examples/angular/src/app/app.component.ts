@@ -3,6 +3,7 @@ import { setupWalletSelector } from "@paras-wallet-selector/core";
 import type { WalletSelector, AccountState } from "@paras-wallet-selector/core";
 import { setupNearWallet } from "@paras-wallet-selector/near-wallet";
 import { setupMyNearWallet } from "@paras-wallet-selector/my-near-wallet";
+import { setupHereWallet } from "@paras-wallet-selector/here-wallet";
 import { setupSender } from "@paras-wallet-selector/sender";
 import { setupMathWallet } from "@paras-wallet-selector/math-wallet";
 import { setupNightly } from "@paras-wallet-selector/nightly";
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit {
       modules: [
         setupNearWallet(),
         setupMyNearWallet(),
+        setupHereWallet(),
         setupSender(),
         setupMathWallet(),
         setupNightly(),

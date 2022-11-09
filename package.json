@@ -35,6 +35,7 @@
     "build:sender": "nx run-many --target=build --projects=sender --configuration=production",
     "build:nightly": "nx run-many --target=build --projects=nightly --configuration=production",
     "build:meteor-wallet": "nx run-many --target=build --projects=meteor-wallet --configuration=production",
+    "build:here-wallet": "nx run-many --target=build --projects=here-wallet --configuration=production",
     "build:wallet-connect": "nx run-many --target=build --projects=wallet-connect --configuration=production",
     "build:nightly-connect": "nx run-many --target=build --projects=nightly-connect --configuration=production",
     "build:wallet-utils": "nx run-many --target=build --projects=wallet-utils --configuration=production",
