@@ -22,11 +22,11 @@ const MyWallet: WalletBehaviourFactory<BrowserWallet> = ({
   provider,
 }) => {
   // Initialise wallet-sepecific client(s) here.
-  
+
   return {
     async signIn({ contractId, methodNames }) {
       // Sign in to My Wallet for access to account(s).
-      
+
       return [];
     },
 
@@ -36,23 +36,23 @@ const MyWallet: WalletBehaviourFactory<BrowserWallet> = ({
 
     async getAccounts() {
       // Return list of signed in accounts.
-      
+
       return [];
     },
 
     async signAndSendTransaction({ signerId, receiverId, actions }) {
       // Sign a list of NEAR Actions before sending via an RPC endpoint.
       // An RPC provider is injected to make this process easier and configured based on options.network.
-      
+
       return provider.sendTransaction(signedTx);
     },
 
     async signAndSendTransactions({ transactions }) {
       // Sign a list of Transactions before sending via an RPC endpoint.
       // An RPC provider is injected to make this process easier and configured based on options.network.
-      
+
       const signedTxs = [];
-        
+
       return Promise.all(
         signedTxs.map((signedTx) => provider.sendTransaction(signedTx))
       );
@@ -65,7 +65,7 @@ export function setupMyWallet({
 }: MyWalletParams = {}): WalletModuleFactory<BrowserWallet> {
   return async () => {
     // Return null here when wallet is unavailable.
-    
+
     return {
       id: "my-wallet",
       type: "browser",
@@ -83,6 +83,7 @@ export function setupMyWallet({
 ```
 
 `WalletModule` (return type of `WalletModuleFactory`) is made up of four properties:
+
 - `id`: Unique identifier for the wallet.
 - `type`: Type of wallet to infer the behaviour and metadata.
 - `metadata`: Metadata for displaying information to the user.

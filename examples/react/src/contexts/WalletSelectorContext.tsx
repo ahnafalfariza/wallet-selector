@@ -4,6 +4,7 @@ import { setupWalletSelector } from "@paras-wallet-selector/core";
 import type { WalletSelector, AccountState } from "@paras-wallet-selector/core";
 import { setupModal } from "@paras-wallet-selector/modal-ui";
 import type { WalletSelectorModal } from "@paras-wallet-selector/modal-ui";
+import { setupHereWallet } from "@paras-wallet-selector/here-wallet";
 import { setupNearWallet } from "@paras-wallet-selector/near-wallet";
 import { setupMyNearWallet } from "@paras-wallet-selector/my-near-wallet";
 import { setupSender } from "@paras-wallet-selector/sender";
@@ -44,6 +45,8 @@ export const WalletSelectorContextProvider: React.FC = ({ children }) => {
       modules: [
         setupNearWallet(),
         setupMyNearWallet(),
+        setupHereWallet(),
+
         setupSender(),
         setupMathWallet(),
         setupNightly(),
