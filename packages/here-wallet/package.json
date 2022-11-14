@@ -1,6 +1,6 @@
 {
   "name": "@paras-wallet-selector/here-wallet",
-  "version": "7.1.0",
+  "version": "5.0.3",
   "peerDependencies": {
     "near-api-js": "^0.44.2"
   }
