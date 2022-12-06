@@ -1,17 +1,25 @@
 # @paras-wallet-selector/here-wallet
 
-This is the [Here Wallet](https://herewallet.app/) package for Paras NEAR Wallet Selector.
+This is the [Here Wallet](https://herewallet.app/) package for NEAR Wallet Selector.
 
 ## Installation and Usage
 
-The easiest way to use this package is to install it from the NPM registry:
+The easiest way to use this package is to install it from the NPM registry, this package requires `near-api-js` v0.44.2 or above:
 
 ```bash
 # Using Yarn
-yarn add @paras-wallet-selector/here-wallet
+yarn add near-api-js
 
 # Using NPM.
-npm install @paras-wallet-selector/here-wallet
+npm install near-api-js
+```
+
+```bash
+# Using Yarn
+yarn add @near-wallet-selector/here-wallet
+
+# Using NPM.
+npm install @near-wallet-selector/here-wallet
 ```
 
 Then use it in your dApp:
@@ -20,34 +28,43 @@ Then use it in your dApp:
 import { setupWalletSelector } from "@paras-wallet-selector/core";
 import { setupHereWallet } from "@paras-wallet-selector/here-wallet";
 
-const hereWallet = setupHereWallet();
 const selector = await setupWalletSelector({
   network: "testnet",
-  modules: [hereWallet],
+  modules: [setupHereWallet()],
 });
 ```
 
-## Options
 
-- `iconUrl`: (`string?`): Image URL for the icon shown in the modal. This can also be a relative path or base64 encoded image. Defaults to base64 from `src/icon.ts`
+## Here Wallet JS SDK
 
-## Additional Methods
+The library uses @here-wallet/core, you can read more about the functionality here:
+https://github.com/here-wallet/js-sdk
 
-- `getHereBalance(): Promise<BN>` <br/>
-  Return available yoktoNears from Here smart contract
 
-- `getAvailableBalance(): Promise<BN>` <br/>
-  Return available yoktoNears from near account + getHereBalance()
+## Instant Wallet with AppClip
 
-You can use it with Typescript:
+If your goal is to provide the user with a convenient way to log in to your desktop app, you can use Here Instant Wallet, which allows users without a wallet to instantly create one via appclip.
+
+At the moment here wallet is only available for IOS users
+
+You have the option to override how your user is delivered the signing link. This is how you can create a long-lived transaction signature request and render it on your web page:
 
 ```ts
+import { QRCodeStrategy } from "@here-wallet/core/qrcode-strategy";
 const isHereWallet = (w: Wallet): w is HereWallet => w.id === "here-wallet";
 
+// Correct typings
 if (isHereWallet(wallet)) {
-  wallet.getAvailableBalance(); // correct typings
+  await here.signIn({
+    contractId: "social.near",
+    strategy: new QRCodeStrategy({ 
+      element: document.getElementById("qr-container"), 
+      theme: 'dark'
+    }),
+  });
 }
 ```
+
 
 ## Assets
 
@@ -57,9 +74,10 @@ Assets such as icons can be found in the `/assets` directory of the package. Bel
 import { setupHereWallet } from "@paras-wallet-selector/here-wallet";
 import HereWalletIconUrl from "@paras-wallet-selector/here-wallet/assets/here-wallet-icon.png";
 
-const hereWallet = setupHereWallet({
-  iconUrl: HereWalletIconUrl,
+const hereWallet = setupHereWallet({ 
+  iconUrl: HereWalletIconUrl 
 });
+
 ```
 
 ## License
