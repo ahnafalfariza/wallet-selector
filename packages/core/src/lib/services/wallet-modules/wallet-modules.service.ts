@@ -161,6 +161,13 @@ export class WalletModules {
       type: "WALLET_CONNECTED",
       payload: { walletId, contract, accounts },
     });
+
+    this.emitter.emit("signedIn", {
+      walletId,
+      contractId,
+      methodNames,
+      accounts,
+    });
   }
 
   private onWalletSignedOut(walletId: string) {
