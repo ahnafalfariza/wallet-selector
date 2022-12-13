@@ -1,4 +1,8 @@
-import type { Wallet, WalletModuleFactory } from "./wallet/wallet.types";
+import type {
+  Account,
+  Wallet,
+  WalletModuleFactory,
+} from "./wallet/wallet.types";
 import type { ReadOnlyStore } from "./store.types";
 import type { Network, NetworkId, Options } from "./options.types";
 import type { Subscription, StorageService } from "./services";
@@ -14,6 +18,15 @@ export type WalletSelectorStore = ReadOnlyStore;
 
 export type WalletSelectorEvents = {
   networkChanged: { walletId: string; networkId: string };
+  signedIn: {
+    walletId: string;
+    contractId: string;
+    methodNames: Array<string>;
+    accounts: Array<Account>;
+  };
+  signedOut: {
+    walletId: string;
+  };
 };
 
 export interface WalletSelector {
