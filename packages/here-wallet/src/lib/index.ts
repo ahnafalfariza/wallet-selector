@@ -1,4 +1,3 @@
-import { hereConfigurations } from "@here-wallet/core";
 import type { HereProvider, HereStrategy } from "@here-wallet/core";
 import type { WalletModuleFactory } from "@paras-wallet-selector/core";
 import type { HereWallet } from "./types";
@@ -20,25 +19,24 @@ export function setupHereWallet({
   defaultStrategy,
   defaultProvider,
 }: Options = {}): WalletModuleFactory<HereWallet> {
-  return async ({ options }) => {
-    const configuration = hereConfigurations[options.network.networkId];
-    if (configuration == null) {
-      return null;
-    }
-
+  return async () => {
     return {
       id: "here-wallet",
       type: "injected",
       metadata: {
         name: "Here Wallet (mobile)",
         description: "Mobile wallet for NEAR Protocol",
-        downloadUrl: configuration.download,
+        downloadUrl: "",
         iconUrl,
         deprecated,
         available: true,
       },
       init: (config) =>
-        initHereWallet({ ...config, defaultStrategy, defaultProvider }),
+        initHereWallet({
+          ...config,
+          defaultStrategy,
+          defaultProvider,
+        }),
     };
   };
 }

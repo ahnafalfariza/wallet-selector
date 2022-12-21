@@ -5,14 +5,40 @@ import type BN from "bn.js";
 import type { SelectorInit } from "./types";
 
 export const initHereWallet: SelectorInit = async (config) => {
-  const { store, logger, emitter, options, ...hereOpts } = config;
+  const { store, logger, emitter, options, defaultProvider, defaultStrategy } =
+    config;
 
-  const here = await HereWallet.initialize({
-    network: options.network.networkId as NetworkId,
-    ...hereOpts,
+  const here = new HereWallet({
+    networkId: options.network.networkId as NetworkId,
+    nodeUrl: options.network.nodeUrl,
+    defaultProvider,
+    defaultStrategy,
   });
 
   return {
+    get networkId() {
+      return here.networkId;
+    },
+    async account(id) {
+      logger.log("HereWallet:account");
+      return await here.account(id);
+    },
+
+    async switchAccount(id) {
+      logger.log("HereWallet:switchAccount");
+      await here.switchAccount(id);
+    },
+
+    async getAccountId() {
+      logger.log("HereWallet:getAccountId");
+      return await here.getAccountId();
+    },
+
+    async isSignedIn() {
+      logger.log("HereWallet:isSignedIn");
+      return await here.isSignedIn();
+    },
+
     async signIn(data) {
       logger.log("HereWallet:signIn");
 
@@ -38,12 +64,13 @@ export const initHereWallet: SelectorInit = async (config) => {
 
     async signOut() {
       logger.log("HereWallet:signOut");
-      return here.signOut();
+      await here.signOut();
     },
 
     async getAccounts() {
       logger.log("HereWallet:getAccounts");
-      return here.isSignedIn ? [{ accountId: here.getAccountId() }] : [];
+      const accounts = await here.getAccounts();
+      return accounts.map((accountId) => ({ accountId }));
     },
 
     async signAndSendTransaction(data) {
@@ -68,7 +95,7 @@ export const initHereWallet: SelectorInit = async (config) => {
     async signMessage({ signerId, message }) {
       logger.log("HereWallet:signMessage", { signerId, message });
       return await here.signMessage({
-        signerId: signerId ?? here.getAccountId(),
+        signerId: signerId ?? (await here.getAccountId()),
         message,
       });
     },
