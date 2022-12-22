@@ -28,9 +28,13 @@ const resolveWalletUrl = (network: Network, walletUrl?: string) => {
 export function setupNearWallet({
   walletUrl,
   iconUrl = "./assets/near-wallet-icon.png",
+  successUrl = "",
+  failureUrl = "",
 }: NearWalletParams = {}): WalletModuleFactory<BrowserWallet> {
   return async (options) => {
     const wallet = await setupMyNearWallet({
+      successUrl: successUrl,
+      failureUrl: failureUrl,
       walletUrl: resolveWalletUrl(options.options.network, walletUrl),
       iconUrl,
     })(options);

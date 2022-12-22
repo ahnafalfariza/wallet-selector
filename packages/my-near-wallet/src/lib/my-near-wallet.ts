@@ -18,6 +18,8 @@ import { createAction } from "@paras-wallet-selector/wallet-utils";
 export interface MyNearWalletParams {
   walletUrl?: string;
   iconUrl?: string;
+  successUrl?: string;
+  failureUrl?: string;
 }
 
 interface MyNearWalletState {
@@ -130,14 +132,19 @@ const MyNearWallet: WalletBehaviourFactory<
   };
 
   return {
-    async signIn({ contractId, methodNames }) {
+    async signIn({ contractId, methodNames, successUrl, failureUrl }) {
       const existingAccounts = getAccounts();
 
       if (existingAccounts.length) {
         return existingAccounts;
       }
 
-      await _state.wallet.requestSignIn({ contractId, methodNames });
+      await _state.wallet.requestSignIn({
+        contractId,
+        methodNames,
+        successUrl,
+        failureUrl,
+      });
 
       return getAccounts();
     },
@@ -214,6 +221,8 @@ const MyNearWallet: WalletBehaviourFactory<
 export function setupMyNearWallet({
   walletUrl,
   iconUrl = "./assets/my-near-wallet-icon.png",
+  successUrl = "",
+  failureUrl = "",
 }: MyNearWalletParams = {}): WalletModuleFactory<BrowserWallet> {
   return async () => {
     return {
@@ -225,6 +234,8 @@ export function setupMyNearWallet({
         iconUrl,
         deprecated: false,
         available: true,
+        successUrl: successUrl,
+        failureUrl: failureUrl,
       },
       init: (options) => {
         return MyNearWallet({

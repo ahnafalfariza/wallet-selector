@@ -68,6 +68,16 @@ export const WalletOptions: React.FC<WalletOptionsProps> = ({
         return onConnectHardwareWallet();
       }
 
+      if (wallet.type === "browser") {
+        await wallet.signIn({
+          contractId: options.contractId,
+          methodNames: options.methodNames,
+          successUrl: wallet.metadata.successUrl,
+          failureUrl: wallet.metadata.failureUrl,
+        });
+        return;
+      }
+
       await wallet.signIn({
         contractId: options.contractId,
         methodNames: options.methodNames,
