@@ -1468,10 +1468,10 @@
   resolved "https://registry.yarnpkg.com/@hapi/bourne/-/bourne-2.0.0.tgz#5bb2193eb685c0007540ca61d166d4e1edaf918d"
   integrity sha512-WEezM1FWztfbzqIUbsDzFRVMxSoLy3HugVcux6KDDtTqzPsLE8NDRHfXvev66aH1i2oOKKar3/XDjbvh/OUBdg==
 
-"@here-wallet/core@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@here-wallet/core/-/core-1.1.0.tgz#330999611e29a83dedc1f1e0e08563dd816ce3ac"
-  integrity sha512-CSAIFzegvFo0gKFPs+ITrGxa/oJkY6Rnfm6ETJe4DkEmX+gPGKyiLHVBalXwBBKH5cASYoxOW94F4HfO21BCQQ==
+"@here-wallet/core@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@here-wallet/core/-/core-1.2.1.tgz#b1dd2ec95c7ffd0a8c4511f3956bf74db869185f"
+  integrity sha512-Ml+Uku7iUuPrQKMS1cRk9KuDNeVn8/kTe6hCveYuNCWUYbBYSDt6kztjo08apJW8UUuVJNDr+vgR2CBWliz79g==
   dependencies:
     sha1 "^1.1.1"
     uuid4 "2.0.3"

@@ -88,15 +88,16 @@ export const initHereWallet: SelectorInit = async (config) => {
     },
 
     async verifyOwner() {
-      logger.log("HereWallet:verifyOwner");
-      throw new Error("verifyOwner is not support");
+      throw Error(
+        "HereWallet:verifyOwner is deprecated, use signMessage method with impletementation NEP0413 Standart"
+      );
     },
 
-    async signMessage({ signerId, message }) {
-      logger.log("HereWallet:signMessage", { signerId, message });
+    async signMessage(data) {
+      logger.log("HereWallet:signMessage", data);
       return await here.signMessage({
-        signerId: signerId ?? (await here.getAccountId()),
-        message,
+        receiver: window.location.host,
+        message: Buffer.from(data.message).toString(),
       });
     },
 
