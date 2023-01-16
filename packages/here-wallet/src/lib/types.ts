@@ -1,6 +1,8 @@
 import type {
   HereInitializeOptions,
   HereWalletProtocol,
+  SignMessageOptions,
+  SignMessageReturn,
 } from "@here-wallet/core";
 
 import type {
@@ -8,8 +10,13 @@ import type {
   InjectedWallet,
 } from "@paras-wallet-selector/core";
 
-export type HereWallet = InjectedWallet &
-  Omit<Omit<Omit<HereWalletProtocol, "getAccounts">, "signIn">, "signMessage">;
+type LegacySign = { signerId?: string; message: Uint8Array; receiver?: string };
+type SignOptions = SignMessageOptions | LegacySign;
+
+export type HereWallet = Omit<InjectedWallet, "signMessage"> &
+  Omit<Omit<HereWalletProtocol, "getAccounts">, "signIn"> & {
+    signMessage: (data: SignOptions) => Promise<SignMessageReturn>;
+  };
 
 export type SelectorInit = WalletBehaviourFactory<
   HereWallet,

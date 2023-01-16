@@ -19,6 +19,7 @@ export const initHereWallet: SelectorInit = async (config) => {
     get networkId() {
       return here.networkId;
     },
+
     async account(id) {
       logger.log("HereWallet:account");
       return await here.account(id);
@@ -42,7 +43,9 @@ export const initHereWallet: SelectorInit = async (config) => {
     async signIn(data) {
       logger.log("HereWallet:signIn");
 
-      const account = await here.signIn(data);
+      const contractId = data.contractId !== "" ? data.contractId : undefined;
+      const account = await here.signIn({ ...data, contractId: contractId });
+
       emitter.emit("signedIn", {
         contractId: data.contractId,
         methodNames: data.methodNames ?? [],
@@ -95,9 +98,17 @@ export const initHereWallet: SelectorInit = async (config) => {
 
     async signMessage(data) {
       logger.log("HereWallet:signMessage", data);
+
+      const message =
+        typeof data.message !== "string"
+          ? Buffer.from(data.message).toString("utf-8")
+          : data.message;
+
+      const { receiver = window.location.host } = data;
       return await here.signMessage({
-        receiver: window.location.host,
-        message: Buffer.from(data.message).toString(),
+        ...data,
+        message,
+        receiver,
       });
     },
 
