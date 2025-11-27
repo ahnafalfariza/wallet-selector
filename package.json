@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@angular/animations": "16.1.9",
-    "@angular/common": "16.1.9",
+    "@angular/common": "19.2.16",
     "@angular/compiler": "16.1.9",
     "@angular/core": "16.1.9",
     "@angular/forms": "16.1.9",
