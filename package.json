@@ -119,7 +119,7 @@
     "is-mobile": "4.0.0",
     "near-api-js": "5.0.0",
     "near-seed-phrase": "0.2.0",
-    "next": "13.3.0",
+    "next": "16.1.5",
     "ngx-deploy-npm": "7.1.0",
     "qrcode": "1.5.4",
     "react": "^18",
